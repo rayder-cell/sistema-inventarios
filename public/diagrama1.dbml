@@ -1,0 +1,38 @@
+table sucursales {
+  id int [pk, increment]
+  nombre varchar(100) [not null]
+  direccion varchar(255)
+  telefono varchar(15)
+  activo boolean [default: true]
+}
+
+table categorias {
+  id int [pk, increment]
+  nombre varchar(255)
+  descripcion text
+}
+
+table productos {
+  id int [pk, increment]
+  categoria_id int [ref: > categorias.id]
+
+  codigo varchar(50) [unique, not null]
+  nombre varchar(255) [not null]
+  descripcion text
+  imagen varchar(255)
+  precio_compra decimal(10, 2) [not null]
+  precio_venta decimal(10, 2) [not null]
+  stock_minimo int [default: 0]
+  stock_maximo int [default: 0]
+  unidad_medida varchar(50) [not null]
+  estado boolean [default: true]
+}
+
+table proveedores {
+  id int [pk, increment]
+  empresa varchar(100) 
+  direccion varchar(255)
+  nombre varchar(100) [not null]
+  telefono varchar(15)
+  email varchar(100)
+}
