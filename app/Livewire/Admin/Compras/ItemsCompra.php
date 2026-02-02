@@ -98,7 +98,7 @@ class ItemsCompra extends Component
                 'lote_id' => $loteId,
                 'cantidad' => $this->cantidad,
                 'precio_unitario' => $this->precioCompra,
-                'subtotal' => $this->cantidad * $this->precioUnitario,
+                'subtotal' => $this->cantidad * $this->precioCompra,
             ]);
             // recalcular el total de la compra y lo guardamos
             $this->compra->total = $this->compra->detalles->sum('subtotal');
