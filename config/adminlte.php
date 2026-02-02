@@ -333,7 +333,15 @@ return [
             'icon' => 'fas fa-fw fa-truck',
             'classes' => 'bg-blue tex-white',
             'active' => ['admin/proveedor*'],
-        ]
+        ],
+
+        [
+            'text' => 'compras',
+            'url' => 'admin/compras',
+            'icon' => 'fas fa-fw fa-shopping-cart',
+            'classes' => 'bg-blue tex-white',
+            'active' => ['admin/compra*'],
+        ],
     ],
 
     /*
@@ -371,7 +379,7 @@ return [
     */
 
     'plugins' => [
-       'Datatables' => [
+        'Datatables' => [
             'active' => true,
             'files' => [
                 [
@@ -466,12 +474,12 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => true,
+                    'asset' => false,  // ← CORREGIDO
                     'location' => 'https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => true,
+                    'asset' => false,  // ← CORREGIDO
                     'location' => 'https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css',
                 ],
             ],

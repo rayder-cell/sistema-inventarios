@@ -14,7 +14,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="card  card-success">
+            <div class="card card-success">
                 <div class="card-header">
                     <h3 class="card-title"><b>Llene los datos del formulario</b></h3>
                 </div>
@@ -27,28 +27,31 @@
                         <div class="row">
                             <div class="col-md-9">
                                 <div class="row">
+                                    {{-- Categoría --}}
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="nombre">Categoría <b style="color:red">(*)</b></label>
+                                            <label for="categoria_id">Categoría <b style="color:red">(*)</b></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-tags"></i></span>
                                                 </div>
-                                                <select name="categoria_id" id="" class="form-control" required>
+                                                <select name="categoria_id" id="categoria_id" class="form-control" required>
                                                     <option value="">Seleccione una categoría</option>
                                                     @foreach ($categorias as $categoria)
                                                         <option value="{{ $categoria->id }}"
-                                                            {{ old('categoria_id',$producto->categoria_id) == $categoria->id ? 'selected' : '' }}>
+                                                            {{ old('categoria_id', $producto->categoria_id) == $categoria->id ? 'selected' : '' }}>
                                                             {{ $categoria->nombre }}
                                                         </option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            @error('nombre')
-                                                <small style="color: red"> {{ $message }}</small>
+                                            @error('categoria_id')
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    {{-- Código --}}
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="codigo">Código <b style="color:red">(*)</b></label>
@@ -56,16 +59,21 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-barcode"></i></span>
                                                 </div>
-                                                <input type="text" value="{{ old('codigo', $producto->codigo) }}" class="form-control"
-                                                    id="codigo" name="codigo"
-                                                    placeholder="Ingrese el código del producto..." required>
-                                                <div data-v-37e428cc=""></div>
+                                                <input type="text" 
+                                                       value="{{ old('codigo', $producto->codigo) }}" 
+                                                       class="form-control"
+                                                       id="codigo" 
+                                                       name="codigo"
+                                                       placeholder="Ingrese el código del producto..." 
+                                                       required>
                                             </div>
                                             @error('codigo')
-                                                <small style="color: red"> {{ $message }}</small>
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    {{-- Nombre --}}
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="nombre">Nombre <b style="color:red">(*)</b></label>
@@ -73,147 +81,175 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-box"></i></span>
                                                 </div>
-                                                <input type="text" value="{{ old('nombre',$producto->nombre) }}" class="form-control"
-                                                    id="nombre" name="nombre"
-                                                    placeholder="Ingrese el nombre del producto..." required>
-                                                <div data-v-37e428cc=""></div>
+                                                <input type="text" 
+                                                       value="{{ old('nombre', $producto->nombre) }}" 
+                                                       class="form-control"
+                                                       id="nombre" 
+                                                       name="nombre"
+                                                       placeholder="Ingrese el nombre del producto..." 
+                                                       required>
                                             </div>
                                             @error('nombre')
-                                                <small style="color: red"> {{ $message }}</small>
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
+
+                                {{-- Descripción --}}
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="descripcion">Descripción <b style="color:red">(*)</b></label>
                                             <div class="editor-wrapper">
-                                                <textarea id="descripcion" name="descripcion" >{{ $producto->descripcion}}</textarea>
+                                                <textarea id="descripcion" 
+                                                          name="descripcion" 
+                                                          cols="30" 
+                                                          rows="10">{{ old('descripcion', $producto->descripcion) }}</textarea>
                                             </div>
                                             @error('descripcion')
-                                                <small style="color: red"> {{ $message }}</small>
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
+                                    {{-- Precio compra --}}
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="precio_compra">Precio compra <b style="color:red">(*)</b></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i
-                                                            class="fas fa-money-bill-wave"></i></span>
+                                                    <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
                                                 </div>
-                                                <input style="text-align: center" type="number"
-                                                    value="{{ old('precio_compra',$producto->precio_compra) }}" class="form-control"
-                                                    id="precio_compra" name="precio_compra" required>
-
+                                                <input style="text-align: center" 
+                                                       type="number"
+                                                       step="0.01"
+                                                       value="{{ old('precio_compra', $producto->precio_compra) }}" 
+                                                       class="form-control"
+                                                       id="precio_compra" 
+                                                       name="precio_compra" 
+                                                       required>
                                             </div>
                                             @error('precio_compra')
-                                                <small style="color: red"> {{ $message }}</small>
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    {{-- Precio venta --}}
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="precio_venta">Precio venta <b style="color:red">(*)</b></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i
-                                                            class="fas fa-money-bill-wave"></i></span>
+                                                    <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
                                                 </div>
-                                                <input style="text-align: center" type="number"
-                                                    value="{{ old('precio_venta',$producto->precio_venta) }}" class="form-control"
-                                                    id="precio_venta" name="precio_venta" required>
-
+                                                <input style="text-align: center" 
+                                                       type="number"
+                                                       step="0.01"
+                                                       value="{{ old('precio_venta', $producto->precio_venta) }}" 
+                                                       class="form-control"
+                                                       id="precio_venta" 
+                                                       name="precio_venta" 
+                                                       required>
                                             </div>
                                             @error('precio_venta')
-                                                <small style="color: red"> {{ $message }}</small>
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    {{-- Stock mínimo --}}
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="stock_minimo">Stock mínimo <b style="color:red">(*)</b></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i
-                                                            class="fas fa-arrow-down"></i></span>
+                                                    <span class="input-group-text"><i class="fas fa-arrow-down"></i></span>
                                                 </div>
-                                                <input style="text-align: center" type="number"
-                                                    value="{{ old('stock_minimo',$producto->stock_minimo) }}" class="form-control"
-                                                    id="stock_minimo" name="stock_minimo" required>
+                                                <input style="text-align: center" 
+                                                       type="number"
+                                                       value="{{ old('stock_minimo', $producto->stock_minimo) }}" 
+                                                       class="form-control"
+                                                       id="stock_minimo" 
+                                                       name="stock_minimo" 
+                                                       required>
                                             </div>
                                             @error('stock_minimo')
-                                                <small style="color: red"> {{ $message }}</small>
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    {{-- Stock máximo --}}
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="stock_maximo">Stock máximo <b style="color:red">(*)</b></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i
-                                                            class="fas fa-arrow-down"></i></span>
+                                                    <span class="input-group-text"><i class="fas fa-arrow-up"></i></span>
                                                 </div>
-                                                <input style="text-align: center" type="number"
-                                                    value="{{ old('stock_maximo', $producto->stock_maximo) }}" class="form-control"
-                                                    id="stock_maximo" name="stock_maximo" required>
+                                                <input style="text-align: center" 
+                                                       type="number"
+                                                       value="{{ old('stock_maximo', $producto->stock_maximo) }}" 
+                                                       class="form-control"
+                                                       id="stock_maximo" 
+                                                       name="stock_maximo" 
+                                                       required>
                                             </div>
                                             @error('stock_maximo')
-                                                <small style="color: red"> {{ $message }}</small>
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    {{-- Unidad de medida --}}
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <label for="unidad_medida">Unidad de medida <b
-                                                    style="color:red">(*)</b></label>
+                                            <label for="unidad_medida">Unidad de medida <b style="color:red">(*)</b></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i
-                                                            class="fas fa-balance-scale"></i></span>
+                                                    <span class="input-group-text"><i class="fas fa-balance-scale"></i></span>
                                                 </div>
-                                                <select name="unidad_medida" id="" class="form-control">
-                                                    <option value="">Seleccione una unidad de medida...</option>
-                                                    <option value="unidad"{{ $producto->unidad_medida== "unidad" ? 'selected':'' }}>Unidad</option>
-                                                    <option value="kg" {{ $producto->unidad_medida== "kg" ? 'selected':'' }}>Kg</option>
-                                                    <option value="litro" {{ $producto->unidad_medida== "litro" ? 'selected':'' }}>Litro</option>
-                                                    <option value="paquete" {{ $producto->unidad_medida== "paquete" ? 'selected':'' }}>Paquete</option>
+                                                <select name="unidad_medida" id="unidad_medida" class="form-control" required>
+                                                    <option value="">Seleccione...</option>
+                                                    <option value="unidad" {{ old('unidad_medida', $producto->unidad_medida) == "unidad" ? 'selected' : '' }}>Unidad</option>
+                                                    <option value="kg" {{ old('unidad_medida', $producto->unidad_medida) == "kg" ? 'selected' : '' }}>Kg</option>
+                                                    <option value="litro" {{ old('unidad_medida', $producto->unidad_medida) == "litro" ? 'selected' : '' }}>Litro</option>
+                                                    <option value="paquete" {{ old('unidad_medida', $producto->unidad_medida) == "paquete" ? 'selected' : '' }}>Paquete</option>
                                                 </select>
                                             </div>
                                             @error('unidad_medida')
-                                                <small style="color: red"> {{ $message }}</small>
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    {{-- Estado --}}
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="estado">Estado <b style="color:red">(*)</b></label>
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i
-                                                            class="fas fa-check-circle"></i></span>
+                                                    <span class="input-group-text"><i class="fas fa-check-circle"></i></span>
                                                 </div>
-                                                <select name="estado" id="" class="form-control">
-                                                    <option value="" disabled selected>Seleccione una opción</option>
-                                                    <option value="1" {{ old('estado',$producto->estado) == '1' ? 'selected' : '' }}>
-                                                        Activo</option>
-                                                    <option value="0" {{ old('estado', $producto->estado) == '0' ? 'selected' : '' }}>
-                                                        Inactivo</option>
+                                                <select name="estado" id="estado" class="form-control" required>
+                                                    <option value="">Seleccione...</option>
+                                                    <option value="1" {{ old('estado', $producto->estado) == '1' ? 'selected' : '' }}>Activo</option>
+                                                    <option value="0" {{ old('estado', $producto->estado) == '0' ? 'selected' : '' }}>Inactivo</option>
                                                 </select>
                                             </div>
                                             @error('estado')
-                                                <small style="color: red"> {{ $message }}</small>
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
+
+                            {{-- Imagen --}}
                             <div class="col-md-3">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -223,31 +259,22 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-image"></i></span>
                                                 </div>
-                                                <input type="file" class="form-control" id="image" name="imagen"
-                                                    accept="image/*" onchange="previewImage(event)">
-
+                                                <input type="file" 
+                                                       class="form-control" 
+                                                       id="imagen" 
+                                                       name="imagen"
+                                                       accept="image/*" 
+                                                       onchange="previewImage(event)">
                                             </div>
                                             <center>
-                                                <img id="imgPreview" src="{{ asset('storage/'. $producto->imagen)}}" width="100%"
-                                                alt="Vista previa de la imagen" style="max-width: 300px;" />
+                                                <img id="imgPreview" 
+                                                     src="{{ $producto->imagen_url }}" 
+                                                     width="100%"
+                                                     alt="Vista previa de la imagen" 
+                                                     style="max-width: 300px;" />
                                             </center>
-                                            <script>
-                                                function previewImage(event) {
-                                                    const input = event.target;
-                                                    const file = input.files[0];
-                                                    if (file) {
-                                                        const reader = new FileReader();
-                                                        reader.onload = function(e) {
-                                                            const imgPreview = document.getElementById('imgPreview');
-                                                            imgPreview.src = e.target.result;
-                                                            imgPreview.style.display = 'block';
-                                                        };
-                                                        reader.readAsDataURL(file);
-                                                    }
-                                                }
-                                            </script>
                                             @error('imagen')
-                                                <small style="color: red"> {{ $message }}</small>
+                                                <small style="color: red">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
@@ -259,14 +286,17 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <a href="{{ url('/admin/productos') }}" class="btn btn-secondary">Cancelar</a>
-                                    <button type="submit" class="btn btn-success">Actualizar</button>
+                                    <a href="{{ url('/admin/productos') }}" class="btn btn-secondary">
+                                        <i class="fas fa-times"></i> Cancelar
+                                    </a>
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-save"></i> Actualizar
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-                
             </div>
         </div>
     </div>
@@ -300,33 +330,45 @@
 @section('js')
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
     <script>
+        // Preview de imagen
+        function previewImage(event) {
+            const input = event.target;
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgPreview = document.getElementById('imgPreview');
+                    imgPreview.src = e.target.result;
+                    imgPreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // CKEditor - Solo plugins disponibles en Classic
         ClassicEditor
             .create(document.querySelector('#descripcion'), {
                 toolbar: {
                     items: [
                         'heading', '|',
-                        'bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript', '|',
-                        'link', 'bulletedList', 'numberedList', '|',
+                        'bold', 'italic', 'link', '|',
+                        'bulletedList', 'numberedList', '|',
                         'outdent', 'indent', '|',
-                        'alignment', '|',
-                        'blockQuote', 'insertTable', 'mediaEmbed', '|',
-                        'undo', 'redo', '|',
-                        'fontBackgroundColor', 'fontColor', 'fontSize', 'fontFamily', '|',
-                        'code', 'codeBlock', 'htmlEmbed', '|',
-                        'sourceEditing'
+                        'blockQuote', 'insertTable', '|',
+                        'undo', 'redo'
                     ],
                     shouldNotGroupWhenFull: true
                 },
                 language: 'es'
             })
             .then(editor => {
-                // Forzar responsive después de crear el editor
+                // Forzar responsive
                 const editorEl = editor.ui.view.element;
                 editorEl.style.width = '100%';
                 editorEl.querySelector('.ck-editor__editable').style.width = '100%';
             })
             .catch(error => {
-                console.error(error);
+                console.error('Error al cargar CKEditor:', error);
             });
     </script>
 @stop

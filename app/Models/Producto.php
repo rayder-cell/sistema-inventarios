@@ -9,22 +9,46 @@ class Producto extends Model
 {
     /** @use HasFactory<\Database\Factories\ProductoFactory> */
     use HasFactory;
+    
     protected $table = 'productos';
+    
     protected $fillable = [
-    'categoria_id',
-    'codigo',
-    'nombre',
-    'descripcion',
-    'imagen',
-    'precio_compra',
-    'precio_venta',
-    'stock_minimo',
-    'stock_maximo',
-    'unidad_medida',
-    'estado'];
+        'categoria_id',
+        'codigo',
+        'nombre',
+        'descripcion',
+        'imagen',
+        'precio_compra',
+        'precio_venta',
+        'stock_minimo',
+        'stock_maximo',
+        'unidad_medida',
+        'estado'
+    ];
 
+    /**
+     * Relación con Categoria
+     */
     public function categoria()
     {
         return $this->belongsTo(Categoria::class);
+    }
+
+    /**
+     * Relación con Lotes
+     */
+    public function lotes()
+    {
+        return $this->hasMany(Lote::class);
+    }
+
+    public function movimientosInventario()
+    {
+        return $this->hasMany(MovimientoInventario::class);
+    }
+
+    public function detalleCompras()
+    {
+        return $this->hasMany(DetalleCompra::class);
     }
 }
